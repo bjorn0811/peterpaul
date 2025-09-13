@@ -1,3 +1,5 @@
+import { InfiniteSlider } from "@/components/ui/InfiniteSlider";
+
 export const KnownFromSection = () => {
   const mediaLogos = [
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAJ-G1hXHAjBX5ZZaGSJNm5fPktNjyMBASOhgPYtjLbuIN2oNHySIIq_K0oFhwfPbhZu6YGoc3SLMstmcsrlZnBY7wvTByhfN2u5dnULK8rz1qVJB9EQMB5MvVx2Jna369gSTSuRh6X0oxJTFYalRdhgbPeR36idM9KGuU6BwbEWxBMsuJrK6c8_QcJywmUFdxY7uif3PklKuwpECEbRAO4Z4fKRdyvAxX-dGzdIvBBB694TsWcyA3_r45InsSqqTFB3gmoHSiQes4",
@@ -12,30 +14,21 @@ export const KnownFromSection = () => {
         Bekend Van
       </h2>
       
-      <div className="relative w-full overflow-hidden">
-        <div className="flex animate-scroll whitespace-nowrap">
-          <div className="flex items-center justify-center gap-16 mx-8">
-            {mediaLogos.map((logo, index) => (
-              <img
-                key={`logo-${index}`}
-                alt={`Media logo ${index + 1}`}
-                className="h-12 grayscale-hover"
-                src={logo}
-              />
-            ))}
-          </div>
-          <div aria-hidden="true" className="flex items-center justify-center gap-16 mx-8">
-            {mediaLogos.map((logo, index) => (
-              <img
-                key={`logo-duplicate-${index}`}
-                alt={`Media logo ${index + 1}`}
-                className="h-12 grayscale-hover"
-                src={logo}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+      <InfiniteSlider 
+        gap={64} 
+        duration={20} 
+        durationOnHover={40}
+        className="w-full"
+      >
+        {mediaLogos.map((logo, index) => (
+          <img
+            key={`logo-${index}`}
+            alt={`Media logo ${index + 1}`}
+            className="h-12 grayscale-hover flex-shrink-0"
+            src={logo}
+          />
+        ))}
+      </InfiniteSlider>
     </section>
   );
 };
