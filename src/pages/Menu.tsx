@@ -164,63 +164,59 @@ const Menu = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 gap-6">
                 {filteredItems.map((item) => {
                   const quantity = getItemQuantity(item.id);
                   
                   return (
                     <div
                       key={item.id}
-                      className="bg-card rounded-lg shadow-xl overflow-hidden group flex flex-col border-2 border-accent transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                      className="bg-card rounded-lg shadow-xl overflow-hidden group flex border-2 border-accent transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
                     >
                       <div
-                        className="w-full bg-center bg-no-repeat aspect-square bg-cover"
+                        className="w-1/3 flex-shrink-0 bg-center bg-no-repeat bg-cover min-h-[120px]"
                         style={{ backgroundImage: `url("${item.image}")` }}
                       />
-                      <div className="p-4 flex flex-col flex-grow">
-                        <h3 className="text-primary text-base md:text-lg font-bold leading-tight mb-2 line-clamp-2 min-h-[3rem]">
+                      <div className="p-4 flex flex-col flex-grow justify-between">
+                        <h3 className="text-primary text-lg font-bold leading-tight">
                           {item.name}
                         </h3>
-                        <div className="flex flex-col gap-3 mt-auto">
+                        <div className="flex items-center justify-between mt-4">
                           <p className="text-primary font-bold text-lg">
                             €{item.price.toFixed(2)}
                           </p>
                           
                           {quantity > 0 ? (
-                            <div className="flex flex-col gap-2">
-                              <div className="flex items-center justify-center gap-3 bg-muted/30 rounded-lg p-2">
-                                <Button
-                                  size="sm"
-                                  variant="outline"
-                                  className="w-8 h-8 p-0 rounded-full flex-shrink-0"
-                                  onClick={() => handleQuantityChange(item, -1)}
-                                >
-                                  <Minus className="h-3 w-3" />
-                                </Button>
-                                <span className="text-lg font-bold text-primary min-w-[2rem] text-center">
-                                  {quantity}
-                                </span>
-                                <Button
-                                  size="sm"
-                                  variant="default"
-                                  className="w-8 h-8 p-0 rounded-full flex-shrink-0"
-                                  onClick={() => handleQuantityChange(item, 1)}
-                                >
-                                  <Plus className="h-3 w-3" />
-                                </Button>
-                              </div>
-                              <p className="text-xs text-center text-muted-foreground">
-                                Totaal: €{(item.price * quantity).toFixed(2)}
-                              </p>
+                            <div className="flex items-center gap-2">
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                className="w-8 h-8 p-0 rounded-full"
+                                onClick={() => handleQuantityChange(item, -1)}
+                              >
+                                <Minus className="h-4 w-4" />
+                              </Button>
+                              <span className="text-lg font-bold text-primary">
+                                {quantity}
+                              </span>
+                              <Button
+                                size="sm"
+                                variant="default"
+                                className="w-8 h-8 p-0 rounded-full"
+                                onClick={() => handleQuantityChange(item, 1)}
+                              >
+                                <Plus className="h-4 w-4" />
+                              </Button>
                             </div>
                           ) : (
                             <Button
                               variant="golden"
-                              className="w-full h-10 font-semibold text-sm rounded-xl bg-gradient-to-r from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-primary/20"
+                              size="sm"
+                              className="px-4 py-2 rounded-full font-semibold"
                               onClick={() => handleQuantityChange(item, 1)}
                             >
-                              <Plus className="h-4 w-4 mr-2" />
-                              Toevoegen aan winkelwagen
+                              <Plus className="h-4 w-4 mr-1" />
+                              Toevoegen
                             </Button>
                           )}
                         </div>
