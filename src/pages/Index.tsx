@@ -7,12 +7,15 @@ import { InstagramSection } from "@/components/InstagramSection";
 import { ContactSection } from "@/components/ContactSection";
 import { MobileNavigation } from "@/components/MobileNavigation";
 import { useToast } from "@/hooks/use-toast";
+import { useCart } from "@/contexts/CartContext";
 import type { FoodItem } from "@/types/menu";
 
 const Index = () => {
   const { toast } = useToast();
+  const { addToCart } = useCart();
 
   const handleAddToCart = (item: FoodItem) => {
+    addToCart(item, 1);
     toast({
       title: "Toegevoegd aan winkelwagen",
       description: `${item.name} is toegevoegd aan je winkelwagen.`,

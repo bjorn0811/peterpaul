@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { MobileNavigation } from "@/components/MobileNavigation";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { useCart } from "@/hooks/useMenu";
+import { useCart } from "@/contexts/CartContext";
 import { Plus, Minus } from "lucide-react";
 import type { FoodItem } from "@/types/menu";
 

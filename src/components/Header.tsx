@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CartPopover } from "@/components/CartPopover";
 import { ShoppingCart } from "lucide-react";
-import { useCart } from "@/hooks/useMenu";
+import { useCart } from "@/contexts/CartContext";
 
 export const Header = () => {
   const location = useLocation();
@@ -79,7 +79,7 @@ export const Header = () => {
           updateQuantity={(itemId: string, change: number) => {
             const currentItem = cartItems.find(item => item.item.id === itemId);
             if (currentItem) {
-              const newQuantity = currentItem.quantity + change;
+              const newQuantity = Math.max(0, currentItem.quantity + change);
               updateQuantity(itemId, newQuantity);
             }
           }}
