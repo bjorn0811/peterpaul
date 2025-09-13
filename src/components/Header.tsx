@@ -55,12 +55,16 @@ export const Header = () => {
           >
             Over Ons
           </Link>
-          <a 
-            className="text-base font-medium text-primary hover:text-accent transition-smooth" 
-            href="/#contact"
+          <Link 
+            to="/contact"
+            className={`text-base font-medium transition-smooth ${
+              isActive("/contact") 
+                ? "text-accent font-bold" 
+                : "text-primary hover:text-accent"
+            }`}
           >
             Contact
-          </a>
+          </Link>
         </nav>
 
         <Button 

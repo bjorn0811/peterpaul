@@ -40,13 +40,15 @@ export const MobileNavigation = () => {
           <Users className={`w-6 h-6 ${isActive("/about") ? "fill-current" : ""}`} />
           <p className="text-xs font-medium tracking-[0.015em]">Over Ons</p>
         </Link>
-        <a 
-          href="/#contact"
-          className="flex flex-col items-center justify-end gap-1 text-primary p-2 transition-smooth hover:text-accent"
+        <Link 
+          to="/contact"
+          className={`flex flex-col items-center justify-end gap-1 p-2 transition-smooth hover:text-accent ${
+            isActive("/contact") ? "text-accent" : "text-primary"
+          }`}
         >
-          <Mail className="w-6 h-6" />
+          <Mail className={`w-6 h-6 ${isActive("/contact") ? "fill-current" : ""}`} />
           <p className="text-xs font-medium tracking-[0.015em]">Contact</p>
-        </a>
+        </Link>
       </div>
       <div className="h-safe"></div>
     </footer>
