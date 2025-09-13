@@ -15,6 +15,10 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Custom foodtruck variants using design system
+        hero: "bg-accent text-accent-foreground hover:bg-accent/90 hover:scale-105 transition-bounce border-2 border-primary shadow-glow font-bold rounded-full",
+        premium: "bg-primary text-primary-foreground hover:bg-primary/90 transition-bounce border-2 border-accent shadow-elegant font-bold rounded-full",
+        golden: "bg-accent text-accent-foreground hover:bg-accent/80 transition-smooth shadow-glow border border-primary/20 rounded-full",
       },
       size: {
         default: "h-10 px-4 py-2",
