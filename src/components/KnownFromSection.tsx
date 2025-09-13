@@ -1,3 +1,5 @@
+import { InfiniteSlider } from "@/components/ui/InfiniteSlider";
+
 export const KnownFromSection = () => {
   const mediaLogos = [
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAJ-G1hXHAjBX5ZZaGSJNm5fPktNjyMBASOhgPYtjLbuIN2oNHySIIq_K0oFhwfPbhZu6YGoc3SLMstmcsrlZnBY7wvTByhfN2u5dnULK8rz1qVJB9EQMB5MvVx2Jna369gSTSuRh6X0oxJTFYalRdhgbPeR36idM9KGuU6BwbEWxBMsuJrK6c8_QcJywmUFdxY7uif3PklKuwpECEbRAO4Z4fKRdyvAxX-dGzdIvBBB694TsWcyA3_r45InsSqqTFB3gmoHSiQes4",
@@ -12,7 +14,12 @@ export const KnownFromSection = () => {
         Bekend Van
       </h2>
       
-      <div className="flex justify-center items-center gap-8 px-4 flex-wrap">
+      <InfiniteSlider 
+        gap={64} 
+        duration={20} 
+        durationOnHover={40}
+        className="w-full py-4"
+      >
         {mediaLogos.map((logo, index) => (
           <img
             key={`logo-${index}`}
@@ -21,7 +28,7 @@ export const KnownFromSection = () => {
             src={logo}
           />
         ))}
-      </div>
+      </InfiniteSlider>
     </section>
   );
 };

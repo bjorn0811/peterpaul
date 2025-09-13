@@ -32,10 +32,6 @@ export function InfiniteSlider({
   useEffect(() => {
     let controls;
     const size = direction === 'horizontal' ? width : height;
-    
-    // Don't start animation until we have measurements
-    if (size === 0) return;
-    
     const contentSize = size + gap;
     const from = reverse ? -contentSize / 2 : 0;
     const to = reverse ? 0 : -contentSize / 2;
@@ -92,7 +88,7 @@ export function InfiniteSlider({
   return (
     <div className={cn('overflow-hidden', className)}>
       <motion.div
-        className="flex w-max items-center"
+        className='flex w-max'
         style={{
           ...(direction === 'horizontal'
             ? { x: translation }
