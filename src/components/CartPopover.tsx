@@ -29,7 +29,7 @@ export const CartPopover = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-auto">
+    <div className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4 overflow-auto">
       <div className="bg-background rounded-2xl shadow-2xl w-full max-w-md border-4 border-accent my-auto">
         {/* Header */}
         <div className="p-6 border-b-2 border-accent flex justify-between items-center">
