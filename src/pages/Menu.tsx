@@ -138,83 +138,83 @@ const Menu = () => {
         <Header />
         
         <main className="flex-grow">
-          <section className="py-12 px-4">
-            <div className="container mx-auto">
-              <h1 className="text-4xl md:text-5xl font-black text-center text-primary mb-4">
-                Ons Menu
-              </h1>
-              <p className="text-center text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Ontdek onze heerlijke, versgebakken specialiteiten. Met liefde gemaakt volgens Oma's traditionele recept.
-              </p>
+        <section className="py-12 px-4">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-black text-center text-primary mb-4">
+              Ons Menu
+            </h1>
+            <p className="text-center text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Ontdek onze heerlijke, versgebakken specialiteiten. Met liefde gemaakt volgens Oma's traditionele recept.
+            </p>
 
-              {/* Category Filters */}
-              <div className="mb-8 px-4">
-                <div className="flex space-x-2 overflow-x-auto whitespace-nowrap no-scrollbar pb-2">
-                  {categories.map((category) => (
-                    <Button
-                      key={category}
-                      variant={selectedCategory === category ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setSelectedCategory(category)}
-                      className="flex-shrink-0"
-                    >
-                      {category}
-                    </Button>
-                  ))}
-                </div>
+            {/* Category Filters */}
+            <div className="mb-8 px-4">
+              <div className="flex space-x-2 overflow-x-auto whitespace-nowrap no-scrollbar pb-2">
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedCategory(category)}
+                    className="flex-shrink-0"
+                  >
+                    {category}
+                  </Button>
+                ))}
               </div>
+            </div>
 
-              <div className="space-y-4">
-                {filteredItems.map((item) => {
-                  const quantity = getItemQuantity(item.id);
-                  
-                  return (
+            <div className="space-y-4 px-4">
+              {filteredItems.map((item) => {
+                const quantity = getItemQuantity(item.id);
+                
+                return (
+                  <div
+                    key={item.id}
+                    className="bg-card rounded-lg shadow-xl overflow-hidden group flex border-2 border-accent transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 w-full max-w-none"
+                  >
                     <div
-                      key={item.id}
-                      className="bg-card rounded-lg shadow-xl overflow-hidden group flex border-2 border-accent transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 w-full"
-                    >
-                      <div
-                        className="w-1/3 flex-shrink-0 bg-center bg-no-repeat bg-cover min-h-[120px]"
-                        style={{ backgroundImage: `url("${item.image}")` }}
-                      />
-                      <div className="p-4 flex flex-col flex-grow justify-between">
-                        <h3 className="text-primary text-lg font-bold leading-tight">
-                          {item.name}
-                        </h3>
-                        <div className="flex items-center justify-between mt-4">
-                          <p className="text-primary font-bold text-lg">
-                            €{item.price.toFixed(2)}
-                          </p>
-                          
-                          <div className="flex items-center gap-3">
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="w-8 h-8 p-0 rounded-full"
-                              onClick={() => handleQuantityChange(item, -1)}
-                            >
-                              <Minus className="h-4 w-4" />
-                            </Button>
-                            <span className="text-lg font-bold text-primary min-w-[2rem] text-center">
-                              {quantity}
-                            </span>
-                            <Button
-                              size="sm"
-                              variant="golden"
-                              className="w-8 h-8 p-0 rounded-full"
-                              onClick={() => handleQuantityChange(item, 1)}
-                            >
-                              <Plus className="h-4 w-4" />
-                            </Button>
-                          </div>
+                      className="w-1/3 flex-shrink-0 bg-center bg-no-repeat bg-cover min-h-[120px]"
+                      style={{ backgroundImage: `url("${item.image}")` }}
+                    />
+                    <div className="p-4 flex flex-col flex-grow justify-between">
+                      <h3 className="text-primary text-lg font-bold leading-tight">
+                        {item.name}
+                      </h3>
+                      <div className="flex items-center justify-between mt-4">
+                        <p className="text-primary font-bold text-lg">
+                          €{item.price.toFixed(2)}
+                        </p>
+                        
+                        <div className="flex items-center gap-3">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="w-8 h-8 p-0 rounded-full"
+                            onClick={() => handleQuantityChange(item, -1)}
+                          >
+                            <Minus className="h-4 w-4" />
+                          </Button>
+                          <span className="text-lg font-bold text-primary min-w-[2rem] text-center">
+                            {quantity}
+                          </span>
+                          <Button
+                            size="sm"
+                            variant="golden"
+                            className="w-8 h-8 p-0 rounded-full"
+                            onClick={() => handleQuantityChange(item, 1)}
+                          >
+                            <Plus className="h-4 w-4" />
+                          </Button>
                         </div>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                );
+              })}
             </div>
-          </section>
+          </div>
+        </section>
         </main>
 
         <MobileNavigation />
