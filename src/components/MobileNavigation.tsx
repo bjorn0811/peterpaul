@@ -4,20 +4,10 @@ import { Home, Menu, Users, Mail } from "lucide-react";
 export const MobileNavigation = () => {
   const location = useLocation();
   
-  const isHome = location.pathname === "/";
-  const isMenu = location.pathname === "/menu";
-  
-  const scrollToSection = (sectionId: string) => {
-    if (!isHome) {
-      // If not on home page, navigate to home first, then scroll
-      window.location.href = `/#${sectionId}`;
-      return;
-    }
-    
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const isActive = (path: string) => {
+    if (path === "/" && location.pathname === "/") return true;
+    if (path !== "/" && location.pathname === path) return true;
+    return false;
   };
 
   return (
@@ -26,35 +16,37 @@ export const MobileNavigation = () => {
         <Link 
           to="/"
           className={`flex flex-col items-center justify-end gap-1 p-2 ${
-            isHome ? "text-accent" : "text-primary"
+            isActive("/") ? "text-accent" : "text-primary"
           }`}
         >
-          <Home className={`w-6 h-6 ${isHome ? "fill-current" : ""}`} />
+          <Home className={`w-6 h-6 ${isActive("/") ? "fill-current" : ""}`} />
           <p className="text-xs font-medium tracking-[0.015em]">Home</p>
         </Link>
         <Link 
           to="/menu"
           className={`flex flex-col items-center justify-end gap-1 p-2 transition-smooth hover:text-accent ${
-            isMenu ? "text-accent" : "text-primary"
+            isActive("/menu") ? "text-accent" : "text-primary"
           }`}
         >
-          <Menu className={`w-6 h-6 ${isMenu ? "fill-current" : ""}`} />
+          <Menu className={`w-6 h-6 ${isActive("/menu") ? "fill-current" : ""}`} />
           <p className="text-xs font-medium tracking-[0.015em]">Menu</p>
         </Link>
-        <button 
-          onClick={() => scrollToSection('about')}
-          className="flex flex-col items-center justify-end gap-1 text-primary p-2 transition-smooth hover:text-accent"
+        <Link 
+          to="/about"
+          className={`flex flex-col items-center justify-end gap-1 p-2 transition-smooth hover:text-accent ${
+            isActive("/about") ? "text-accent" : "text-primary"
+          }`}
         >
-          <Users className="w-6 h-6" />
+          <Users className={`w-6 h-6 ${isActive("/about") ? "fill-current" : ""}`} />
           <p className="text-xs font-medium tracking-[0.015em]">Over Ons</p>
-        </button>
-        <button 
-          onClick={() => scrollToSection('contact')}
+        </Link>
+        <a 
+          href="/#contact"
           className="flex flex-col items-center justify-end gap-1 text-primary p-2 transition-smooth hover:text-accent"
         >
           <Mail className="w-6 h-6" />
           <p className="text-xs font-medium tracking-[0.015em]">Contact</p>
-        </button>
+        </a>
       </div>
       <div className="h-safe"></div>
     </footer>

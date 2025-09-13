@@ -45,12 +45,16 @@ export const Header = () => {
           >
             Menu
           </Link>
-          <a 
-            className="text-base font-medium text-primary hover:text-accent transition-smooth" 
-            href="/#about"
+          <Link 
+            to="/about"
+            className={`text-base font-medium transition-smooth ${
+              isActive("/about") 
+                ? "text-accent font-bold" 
+                : "text-primary hover:text-accent"
+            }`}
           >
             Over Ons
-          </a>
+          </Link>
           <a 
             className="text-base font-medium text-primary hover:text-accent transition-smooth" 
             href="/#contact"
