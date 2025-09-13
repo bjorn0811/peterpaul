@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 export const HeroSection = () => {
@@ -14,12 +15,14 @@ export const HeroSection = () => {
         </h1>
         
         <div className="flex-wrap gap-4 flex justify-center">
-          <Button 
-            variant="hero"
-            size="lg"
-          >
-            Bekijk het Menu
-          </Button>
+          <Link to="/menu">
+            <Button 
+              variant="hero"
+              size="lg"
+            >
+              Bekijk het Menu
+            </Button>
+          </Link>
           <Button 
             variant="premium"
             size="lg"
