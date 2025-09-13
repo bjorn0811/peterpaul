@@ -18,7 +18,7 @@ export const KnownFromSection = () => {
         gap={64} 
         duration={20} 
         durationOnHover={40}
-        className="w-full"
+        className="w-full py-4"
       >
         {mediaLogos.map((logo, index) => (
           <img
