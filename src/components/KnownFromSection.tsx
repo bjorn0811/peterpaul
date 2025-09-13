@@ -1,5 +1,3 @@
-import { InfiniteSlider } from "@/components/ui/InfiniteSlider";
-
 export const KnownFromSection = () => {
   const mediaLogos = [
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAJ-G1hXHAjBX5ZZaGSJNm5fPktNjyMBASOhgPYtjLbuIN2oNHySIIq_K0oFhwfPbhZu6YGoc3SLMstmcsrlZnBY7wvTByhfN2u5dnULK8rz1qVJB9EQMB5MvVx2Jna369gSTSuRh6X0oxJTFYalRdhgbPeR36idM9KGuU6BwbEWxBMsuJrK6c8_QcJywmUFdxY7uif3PklKuwpECEbRAO4Z4fKRdyvAxX-dGzdIvBBB694TsWcyA3_r45InsSqqTFB3gmoHSiQes4",
@@ -14,21 +12,16 @@ export const KnownFromSection = () => {
         Bekend Van
       </h2>
       
-      <InfiniteSlider 
-        gap={64} 
-        duration={20} 
-        durationOnHover={40}
-        className="w-full py-4"
-      >
+      <div className="flex justify-center items-center gap-8 px-4 flex-wrap">
         {mediaLogos.map((logo, index) => (
           <img
             key={`logo-${index}`}
             alt={`Media logo ${index + 1}`}
-            className="h-12 grayscale-hover flex-shrink-0"
+            className="h-12 grayscale hover:grayscale-0 transition-all duration-300 flex-shrink-0"
             src={logo}
           />
         ))}
-      </InfiniteSlider>
+      </div>
     </section>
   );
 };
