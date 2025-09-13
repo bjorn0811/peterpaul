@@ -1,13 +1,14 @@
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { CartPopover } from "@/components/CartPopover";
 import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/hooks/useMenu";
 
-interface HeaderProps {
-  cartCount?: number;
-}
-
-export const Header = ({ cartCount = 0 }: HeaderProps) => {
+export const Header = () => {
   const location = useLocation();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { cartItems, updateQuantity, getTotalPrice, getTotalItems } = useCart();
   
   const isActive = (path: string) => {
     if (path === "/" && location.pathname === "/") return true;
@@ -61,14 +62,29 @@ export const Header = ({ cartCount = 0 }: HeaderProps) => {
         <Button 
           variant="golden" 
           size="default"
-          className="font-bold flex items-center gap-2"
+          className="font-bold flex items-center gap-2 relative"
+          onClick={() => setIsCartOpen(true)}
         >
           <ShoppingCart className="h-4 w-4" />
           <span className="hidden sm:inline">Winkelwagen</span>
-          {cartCount > 0 && (
-            <span className="ml-1">({cartCount})</span>
+          {getTotalItems() > 0 && (
+            <span className="ml-1">({getTotalItems()})</span>
           )}
         </Button>
+
+        <CartPopover
+          isOpen={isCartOpen}
+          onClose={() => setIsCartOpen(false)}
+          cartItems={cartItems}
+          updateQuantity={(itemId: string, change: number) => {
+            const currentItem = cartItems.find(item => item.item.id === itemId);
+            if (currentItem) {
+              const newQuantity = currentItem.quantity + change;
+              updateQuantity(itemId, newQuantity);
+            }
+          }}
+          getTotalPrice={getTotalPrice}
+        />
       </div>
     </header>
   );

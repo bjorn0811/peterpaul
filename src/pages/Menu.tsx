@@ -3,15 +3,14 @@ import { Header } from "@/components/Header";
 import { MobileNavigation } from "@/components/MobileNavigation";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useCart } from "@/hooks/useMenu";
 import { Plus, Minus } from "lucide-react";
 import type { FoodItem } from "@/types/menu";
 
 const Menu = () => {
   const { toast } = useToast();
   const [selectedCategory, setSelectedCategory] = useState("Alles");
-  const [cart, setCart] = useState<Record<string, number>>({
-    "traditionele-oliebollen": 1
-  });
+  const { cartItems, addToCart, updateQuantity } = useCart();
 
   const categories = ["Alles", "Oliebollen", "Beignets", "Dranken", "Overig"];
 
@@ -76,30 +75,30 @@ const Menu = () => {
     ? menuItems 
     : menuItems.filter(item => item.category === selectedCategory);
 
-  const updateQuantity = (itemId: string, change: number) => {
-    setCart(prev => {
-      const currentQuantity = prev[itemId] || 0;
-      const newQuantity = Math.max(0, currentQuantity + change);
-      
-      if (newQuantity === 0) {
-        const { [itemId]: removed, ...rest } = prev;
-        return rest;
-      }
-      
-      return { ...prev, [itemId]: newQuantity };
-    });
+  const handleQuantityChange = (item: FoodItem, change: number) => {
+    const currentCartItem = cartItems.find(cartItem => cartItem.item.id === item.id);
+    const currentQuantity = currentCartItem ? currentCartItem.quantity : 0;
+    const newQuantity = Math.max(0, currentQuantity + change);
+    
+    if (newQuantity === 0) {
+      updateQuantity(item.id, 0);
+    } else if (currentQuantity === 0) {
+      addToCart(item, newQuantity);
+    } else {
+      updateQuantity(item.id, newQuantity);
+    }
 
     if (change > 0) {
-      const item = menuItems.find(i => i.id === itemId);
       toast({
         title: "Toegevoegd aan winkelwagen",
-        description: `${item?.name} is toegevoegd aan je winkelwagen.`,
+        description: `${item.name} is toegevoegd aan je winkelwagen.`,
       });
     }
   };
 
-  const getTotalItems = () => {
-    return Object.values(cart).reduce((sum, quantity) => sum + quantity, 0);
+  const getItemQuantity = (itemId: string) => {
+    const cartItem = cartItems.find(item => item.item.id === itemId);
+    return cartItem ? cartItem.quantity : 0;
   };
 
   return (
@@ -165,10 +164,9 @@ const Menu = () => {
                 </div>
               </div>
 
-              {/* Menu Grid */}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {filteredItems.map((item) => {
-                  const quantity = cart[item.id] || 0;
+                  const quantity = getItemQuantity(item.id);
                   
                   return (
                     <div
@@ -194,7 +192,7 @@ const Menu = () => {
                                 size="sm"
                                 variant="outline"
                                 className="w-8 h-8 p-0"
-                                onClick={() => updateQuantity(item.id, -1)}
+                                onClick={() => handleQuantityChange(item, -1)}
                               >
                                 <Minus className="h-4 w-4" />
                               </Button>
@@ -205,7 +203,7 @@ const Menu = () => {
                                 size="sm"
                                 variant="default"
                                 className="w-8 h-8 p-0"
-                                onClick={() => updateQuantity(item.id, 1)}
+                                onClick={() => handleQuantityChange(item, 1)}
                               >
                                 <Plus className="h-4 w-4" />
                               </Button>
@@ -215,7 +213,7 @@ const Menu = () => {
                               size="sm"
                               variant="default"
                               className="w-9 h-9 p-0"
-                              onClick={() => updateQuantity(item.id, 1)}
+                              onClick={() => handleQuantityChange(item, 1)}
                             >
                               <Plus className="h-4 w-4" />
                             </Button>
