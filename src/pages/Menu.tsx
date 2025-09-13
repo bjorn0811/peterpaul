@@ -186,26 +186,33 @@ const Menu = () => {
                           €{item.price.toFixed(2)}
                         </p>
                         
-                        <div className="flex items-center gap-3">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="w-8 h-8 p-0 rounded-full"
-                            onClick={() => handleQuantityChange(item, -1)}
-                          >
-                            <Minus className="h-4 w-4" />
-                          </Button>
-                          <span className="text-lg font-bold text-primary min-w-[2rem] text-center">
-                            {quantity}
-                          </span>
-                          <Button
-                            size="sm"
-                            variant="golden"
-                            className="w-8 h-8 p-0 rounded-full"
-                            onClick={() => handleQuantityChange(item, 1)}
-                          >
-                            <Plus className="h-4 w-4" />
-                          </Button>
+                        <div className="flex flex-col items-end gap-1">
+                          {quantity > 0 && (
+                            <p className="text-sm text-muted-foreground">
+                              Totaal: €{(item.price * quantity).toFixed(2)}
+                            </p>
+                          )}
+                          <div className="flex items-center gap-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="w-6 h-6 p-0 rounded-full"
+                              onClick={() => handleQuantityChange(item, -1)}
+                            >
+                              <Minus className="h-3 w-3" />
+                            </Button>
+                            <span className="text-lg font-bold text-primary min-w-[2rem] text-center">
+                              {quantity}
+                            </span>
+                            <Button
+                              size="sm"
+                              variant="golden"
+                              className="w-6 h-6 p-0 rounded-full"
+                              onClick={() => handleQuantityChange(item, 1)}
+                            >
+                              <Plus className="h-3 w-3" />
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
