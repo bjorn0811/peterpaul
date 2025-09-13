@@ -178,7 +178,7 @@ const Menu = () => {
                         style={{ backgroundImage: `url("${item.image}")` }}
                       />
                       <div className="p-4 flex flex-col flex-grow">
-                        <h3 className="text-primary text-base md:text-lg font-bold leading-tight mb-2 line-clamp-2 min-h-[2.5rem]">
+                        <h3 className="text-primary text-base md:text-lg font-bold leading-tight mb-2 line-clamp-2 min-h-[3rem]">
                           {item.name}
                         </h3>
                         <div className="flex flex-col gap-3 mt-auto">
