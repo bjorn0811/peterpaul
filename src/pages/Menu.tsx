@@ -178,10 +178,10 @@ const Menu = () => {
                         style={{ backgroundImage: `url("${item.image}")` }}
                       />
                       <div className="p-4 flex flex-col flex-grow">
-                        <h3 className="text-primary text-lg font-bold leading-tight">
+                        <h3 className="text-primary text-base md:text-lg font-bold leading-tight mb-2 line-clamp-2 min-h-[2.5rem]">
                           {item.name}
                         </h3>
-                        <div className="flex flex-col gap-2 mt-4">
+                        <div className="flex flex-col gap-3 mt-auto">
                           <p className="text-primary font-bold text-lg">
                             €{item.price.toFixed(2)}
                           </p>
@@ -192,7 +192,7 @@ const Menu = () => {
                                 <Button
                                   size="sm"
                                   variant="outline"
-                                  className="w-8 h-8 p-0 rounded-full"
+                                  className="w-8 h-8 p-0 rounded-full flex-shrink-0"
                                   onClick={() => handleQuantityChange(item, -1)}
                                 >
                                   <Minus className="h-3 w-3" />
@@ -203,7 +203,7 @@ const Menu = () => {
                                 <Button
                                   size="sm"
                                   variant="default"
-                                  className="w-8 h-8 p-0 rounded-full"
+                                  className="w-8 h-8 p-0 rounded-full flex-shrink-0"
                                   onClick={() => handleQuantityChange(item, 1)}
                                 >
                                   <Plus className="h-3 w-3" />
@@ -215,13 +215,12 @@ const Menu = () => {
                             </div>
                           ) : (
                             <Button
-                              variant="default"
-                              size="sm"
-                              className="w-full h-8 font-medium text-sm"
+                              variant="golden"
+                              className="w-full h-10 font-semibold text-sm rounded-xl bg-gradient-to-r from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 shadow-lg hover:shadow-xl transition-all duration-200 border-2 border-primary/20"
                               onClick={() => handleQuantityChange(item, 1)}
                             >
-                              <Plus className="h-3 w-3 mr-1" />
-                              Toevoegen
+                              <Plus className="h-4 w-4 mr-2" />
+                              Toevoegen aan winkelwagen
                             </Button>
                           )}
                         </div>
