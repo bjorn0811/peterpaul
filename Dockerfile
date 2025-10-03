@@ -1,34 +1,25 @@
-# Use Node.js 20 LTS for reliable builds
-FROM node:20-alpine AS builder
+# Use Node.js 20 LTS
+FROM node:20-alpine
 
 WORKDIR /app
 
 # Copy package files
 COPY package.json package-lock.json ./
 
-# Install all dependencies (including devDependencies for build)
+# Install all dependencies
 RUN npm ci
 
 # Copy source code
 COPY . .
 
 # Build the application
-RUN npm run build && echo "Build completed at $(date)" > /app/build.timestamp
+RUN npm run build
 
-# Production stage with nginx
-FROM nginx:alpine
+# Install serve to run static files
+RUN npm install -g serve
 
-# Remove default nginx configuration
-RUN rm /etc/nginx/conf.d/default.conf
+# Expose port 3000
+EXPOSE 3000
 
-# Copy built application
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Copy nginx config
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose port 8086
-EXPOSE 8086
-
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Serve the built application
+CMD ["serve", "-s", "dist", "-l", "3000"]
