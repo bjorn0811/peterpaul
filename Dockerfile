@@ -13,10 +13,13 @@ RUN npm ci
 COPY . .
 
 # Build the application
-RUN npm run build
+RUN npm run build && echo "Build completed at $(date)" > /app/build.timestamp
 
 # Production stage with nginx
 FROM nginx:alpine
+
+# Remove default nginx configuration
+RUN rm /etc/nginx/conf.d/default.conf
 
 # Copy built application
 COPY --from=builder /app/dist /usr/share/nginx/html
